@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Model 3 Performance - Ludicrous Speed</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS (แยกไฟล์ตามโครงสร้างโปรเจกต์) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- พื้นหลังแสงประจุไฟฟ้า Particle Canvas -->
+    <canvas id="ambient-canvas"></canvas>
+
+    <!-- Navigation Header -->
+    <header>
+        <a href="#" class="logo">
+            <span class="ludicrous-badge">///</span> TESLA <span>MODEL 3</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#overview">ภาพรวม</a></li>
+            <li><a href="#launch-mode">Launch Control</a></li>
+            <li><a href="#chassis">สมรรถนะตัวถัง</a></li>
+        </ul>
+        <a href="#launch-mode" class="nav-cta">TEST LAUNCH</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="overview">
+        <div class="hero-container">
+            
+            <!-- ด้านซ้าย: ข้อมูลและสเปกเด่น -->
+            <div class="hero-content">
+                <div class="status-badge">
+                    <span class="pulse-dot"></span> Highland Ludicrous Edition
+                </div>
+                <h1>MODEL 3<br><span class="gradient-text">PERFORMANCE</span></h1>
+                <p class="hero-desc">
+                    ทะยานสู่อีกขั้นของขุมพลังมอเตอร์ไฟฟ้าคู่เจเนอเรชันใหม่ ระบบขับเคลื่อนสี่ล้อ AWD ผสานระบบกันสะเทือน Adaptive Damping ปรับอัตโนมัติ ตอบสนองฉับไว สยบทุกโค้งด้วยจิตวิญญาณแห่งสนามแข่ง
+                </p>
+
+                <!-- ปุ่มการทำงาน -->
+                <div class="cta-group">
+                    <a href="#launch-mode" class="btn btn-primary">
+                        <i class="fa-solid fa-bolt"></i> โหมดเร่งความเร็ว
+                    </a>
+                    <a href="#chassis" class="btn btn-secondary">
+                        <i class="fa-solid fa-circle-nodes"></i> สเปก Track Mode
+                    </a>
+                </div>
+
+                <!-- การ์ดตัวเลขสถิติ -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="m-label">0-100 กม./ชม.</span>
+                        <div class="m-val">3.1<span class="m-unit">วินาที</span></div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-label">ความเร็วสูงสุด</span>
+                        <div class="m-val">262<span class="m-unit">กม./ชม.</span></div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-label">พละกำลังสูงสุด</span>
+                        <div class="m-val">510<span class="m-unit">HP</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ด้านขวา: กรอบรูปภาพพร้อมลูกเล่น 3D Parallax และตัวเลือกสี -->
+            <div class="hero-display">
+                <div class="interactive-card" id="card3D">
+                    <!-- เส้นกรอบเรืองแสงมุม 4 ด้าน -->
+                    <div class="corner c-tl"></div>
+                    <div class="corner c-tr"></div>
+                    <div class="corner c-bl"></div>
+                    <div class="corner c-br"></div>
+
+                    <!-- รูปถ่ายตัวรถ (สามารถเปลี่ยนเป็น images/model3-red.jpg หากเก็บรูปไว้ในเครื่อง) -->
+                    <div class="img-wrapper">
+                        <img id="carImage" src="img/model3-red.webp" alt="Tesla Model 3 Performance">
+                    </div>
+
+                    <!-- แถบเลือกสลับสีตัวถัง -->
+                    <div class="color-palette">
+                        <div class="color-dot active" 
+                             style="background: #a6121a;" 
+                             data-color="Ultra Red" 
+                             data-img="img/model3-red.webp"
+                             title="Ultra Red"></div>
+                        <div class="color-dot" 
+                             style="background: #2b2e35;" 
+                             data-color="Stealth Grey" 
+                             data-img="img/model3-grey.avif" 
+                             title="Stealth Grey"></div>
+                        <div class="color-dot" 
+                             style="background: #eaeaea;" 
+                             data-color="Pearl White" 
+                             data-img="img/model3-white.jpg" 
+                             title="Pearl White"></div>
+                        <div class="color-dot" 
+                             style="background: #111113;" 
+                             data-color="Solid Black" 
+                             data-img="img/model3-black.jpg" 
+                             title="Solid Black"></div>
+                    </div>
+
+                    <!-- HUD ด้านล่างภาพ -->
+                    <div class="hud-overlay">
+                        <div>
+                            <div class="hud-sub">BODYWORK PAINT</div>
+                            <div class="hud-main" id="colorLabel">Ultra Red Multi-Coat</div>
+                        </div>
+                        <div class="hud-badge"><i class="fa-solid fa-shield-halved"></i> FORGED 20" WARP</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Launch Control Simulator Section -->
+    <section class="launch-section" id="launch-mode">
+        <div class="section-title">
+            <span class="sub-heading">VIRTUAL TELEMETRY</span>
+            <h2>LUDICROUS LAUNCH CONTROL</h2>
+            <p>สัมผัสแรงดึงกระชากหลังติดเบาะด้วยเสียงสังเคราะห์ Dual Electric Inverter Whine</p>
+        </div>
+
+        <div class="simulator-box">
+            <!-- หน้าปัดแสดงผลจำลอง -->
+            <div class="hud-dashboard">
+                <div class="dash-block">
+                    <span class="dash-label">ACCELERATION (0-100)</span>
+                    <div class="dash-value" id="timerDisplay">0.00 <span class="unit">s</span></div>
+                </div>
+                <div class="dash-block">
+                    <span class="dash-label">SPEEDOMETER</span>
+                    <div class="dash-value" id="speedDisplay">0 <span class="unit">km/h</span></div>
+                </div>
+                <div class="dash-block">
+                    <span class="dash-label">MAX G-FORCE</span>
+                    <div class="dash-value" id="gforceDisplay">0.00 <span class="unit">G</span></div>
+                </div>
+            </div>
+
+            <!-- แถบโหลดกำลังไฟ -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="launchProgress"></div>
+            </div>
+
+            <!-- ปุ่มกระตุ้นการออกตัว -->
+            <div class="pedal-wrapper">
+                <button class="launch-btn" id="launchBtn">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                    <span>กดค้างเพื่อสปูลแรงบิด (HOLD TO LAUNCH)</span>
+                </button>
+            </div>
+            <p class="hint-text"><i class="fa-solid fa-volume-high"></i> แนะนำให้เปิดเสียงเพื่อฟังคลื่นความถี่มอเตอร์ไฟฟ้าตอนออกตัว</p>
+        </div>
+    </section>
+
+    <!-- Engineering & Aerodynamics Section -->
+    <section class="chassis-section" id="chassis">
+        <div class="section-title">
+            <span class="sub-heading">TRACK READY ARCHITECTURE</span>
+            <h2>วิศวกรรมเฉพาะรุ่น PERFORMANCE</h2>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon-circle"><i class="fa-solid fa-sliders"></i></div>
+                <h3>Adaptive Suspension</h3>
+                <p>ระบบโช้กอัพไฟฟ้าแปรผันแบบเรียลไทม์ ปรับความหนืดอัตโนมัติตามพื้นผิวถนนและมุมเลี้ยวเพื่อลดอาการโคลงของตัวรถ</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-circle"><i class="fa-solid fa-wind"></i></div>
+                <h3>Carbon Fiber Spoiler</h3>
+                <p>สปอยเลอร์หลังผลิตจากเส้นใยคาร์บอนแท้ ช่วยรีดกระแสลมด้านท้าย เพิ่มแรงกด Downforce ให้ล้อหลังเกาะหนึบในความเร็วสูง</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-circle"><i class="fa-solid fa-couch"></i></div>
+                <h3>Sport Bucket Seats</h3>
+                <p>เบาะนั่งคู่หน้าทรงบั๊กเก็ตซีทแบบใหม่ โอบกระชับสรีระด้านข้าง ป้องกันตัวเลื่อนหลุดตำแหน่งขณะเจอแรงเหวี่ยงหนีศูนย์กลาง</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">/// TESLA <span>MODEL 3 PERFORMANCE</span></div>
+        <div class="copyright">© 2026 Interactive Concept Landing Page. Modular HTML / CSS / JS.</div>
+    </footer>
+
+    <!-- Custom JS (แยกไฟล์ตามโครงสร้างโปรเจกต์) -->
+    <script src="js/main.js"></script>
+</body>
+</html>
